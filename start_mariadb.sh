@@ -7,7 +7,7 @@ if [[ ! -f /opt/mysql/initialized ]]; then
     chmod -R 755 /opt/mysql
 fi
 sleep 2
-mysqld_safe &
+mysqld_safe --skip-syslog --log-error=/var/log/mysql.err &
 sleep 8
 if [[ ! -f /opt/mysql/initialized ]]; then
     echo "CREATE DATABASE db;" | mysql -u root --password=a_stronk_password
@@ -15,4 +15,4 @@ if [[ ! -f /opt/mysql/initialized ]]; then
     echo "GRANT ALL ON *.* to root@'%' IDENTIFIED BY '$1'; FLUSH PRIVILEGES;" | mysql -u root --password="$1" mysql
     touch /opt/mysql/initialized
 fi
-tailf /var/log/mysql.log
+tail -f /var/log/mysql.log /var/log/mysql.err
