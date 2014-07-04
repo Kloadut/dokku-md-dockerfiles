@@ -8,7 +8,8 @@ if [[ ! -f /opt/mysql/initialized ]]; then
 fi
 sleep 2
 mysqld_safe --skip-syslog --log-error=/var/log/mysql.err &
-sleep 8
+# Wait for socket to be ready
+while [ ! -S /var/run/mysqld/mysqld.sock ]; do sleep 1; done
 if [[ ! -f /opt/mysql/initialized ]]; then
     echo "CREATE DATABASE db;" | mysql -u root --password=a_stronk_password
     echo "UPDATE mysql.user SET Password=PASSWORD('$1') WHERE User='root'; FLUSH PRIVILEGES;" | mysql -u root --password=a_stronk_password mysql
