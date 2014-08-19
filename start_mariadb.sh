@@ -16,4 +16,5 @@ if [[ ! -f /opt/mysql/initialized ]]; then
     echo "GRANT ALL ON *.* to root@'%' IDENTIFIED BY '$1'; FLUSH PRIVILEGES;" | mysql -u root --password="$1" mysql
     touch /opt/mysql/initialized
 fi
-tail -f /var/log/mysql.log /var/log/mysql.err
+touch /var/log/mysql/mariadb-slow.log
+tail -f /var/log/mysql.log /var/log/mysql.err /var/log/mysql/mariadb-slow.log
