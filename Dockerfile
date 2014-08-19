@@ -24,3 +24,6 @@ RUN	rm /usr/sbin/policy-rc.d
 
 RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
 RUN sed -i -e"s/var\/lib/opt/g" /etc/mysql/my.cnf
+
+# skip reverse DNS lookup of clients (hostnames are not used for authentication and this prevents the db server performance problems if dns is down or slow for some reason)
+RUN printf '[mysqld]\nskip-name-resolve\n' > /etc/mysql/conf.d/skip-name-resolve.cnf
