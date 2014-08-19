@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 if [[ ! -f /opt/mysql/initialized ]]; then
     mkdir -p /opt/mysql
     cp -a /var/lib/mysql/* /opt/mysql/
