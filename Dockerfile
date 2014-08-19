@@ -2,7 +2,7 @@ FROM	ubuntu:trusty
 MAINTAINER	kload "kload@kload.fr"
 
 # prevent apt from starting mariadb right after the installation
-RUN	echo "#!/bin/sh\nexit 101" > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d
+RUN	printf '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
