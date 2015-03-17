@@ -16,6 +16,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get clean
 
 ADD	. /usr/bin
+RUN	mv /usr/bin/charset.cnf /etc/mysql/conf.d
 RUN	chmod +x /usr/bin/start_mariadb.sh
 
 # allow autostart again
